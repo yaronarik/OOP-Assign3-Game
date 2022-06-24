@@ -1,16 +1,32 @@
-public class Player extends Unit{
-    private  int _experience = 0;
-    protected int _levele =1;
-    private int _afterGain = 50;
+public abstract class Player extends Unit{
+   private int exp;
+   private int level;
+   protected SpecialAbillity specialAbillity;
+   public Player(int x,int y,String name,int healthPool,int attackPoints,int defensePoints,SpecialAbillity spec)
+   {
+       super(x,y,'@',name,healthPool,attackPoints,defensePoints);
+       this.exp=0;
+       this.level=1;
+        specialAbillity=spec;
+   }
 
-    protected void levelUp(){
-        _experience =_experience - (50 * _levele);
-        _levele = _levele + 1;
-        _healthPool = _healthPool + (10 * _levele);
-        _healthCurrent = _healthPool;
-        _attackPoints = _attackPoints + (4 * _levele);
-        _defensePoints = _defensePoints + (1*_levele);
-    }
 
+   public boolean gainExpAndLevelUpIfNeed(int experience)
+   {
+       exp+=experience;
+       if(exp>=50*level)
+           return true;
+       return false;
+
+   }
+   public void levelUp()
+   {
+       exp=exp-50*level;
+       level++;
+
+       this.attackPoints+=4*level;
+       this.defensePoints+=1*level;
+   }
+   public  abstract void tryAbillityCast();
 
 }

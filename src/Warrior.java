@@ -1,26 +1,31 @@
 public class Warrior extends Player{
-    private int _abilityCooldown;
-    private int _remainCooldown;
 
+    public Warrior(int x,int y,String name,int healthPool,int attackPoints,int defensePoints,SpecialAbillity spec, int cooldown)
+    {
+        super(x,y,name,healthPool,attackPoints,defensePoints,new AvengersShield(cooldown));
+    }
 
-    protected void levelUp(){
+    public void tryAbillityCast()
+    {
+        //throw new Execption("not enough resources");
+
+        if(!specialAbillity.canAttack())
+            return;
+        else
+            makeAbillityCast();
+    }
+
+    public void makeAbillityCast()
+    {
+
+    }
+
+    public void levelUp()
+    {
         super.levelUp();
-        _remainCooldown = 0;
-        _healthPool = _healthPool + (5 * _levele);
-        _attackPoints = _attackPoints + (2 * _levele);
-        _defensePoints = _defensePoints + (1 * _levele);
-    }
-
-    protected void onGameTick(){
-        _remainCooldown =_remainCooldown-1;
-    }
-
-    protected void abilityCast(){ // Avenger's Shield
-        _remainCooldown = _abilityCooldown;
-        _healthCurrent = Math.min(_healthCurrent + (10 * _defensePoints),_healthPool);
-
+        // warrior things to levelup
+        this.specialAbillity.changeSpecialAbillityWhenLevelUp(); //
 
 
     }
-
 }
