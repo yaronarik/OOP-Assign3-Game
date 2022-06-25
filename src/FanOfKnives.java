@@ -15,7 +15,7 @@ public class FanOfKnives extends SpecialAbillity{
 
     @Override
     public void changeSpecialAbillityWhenLevelUp(int level) {
-        currentEnergy = currentEnergy -currentEnergy;
+        currentEnergy = 100;
 
         //For each enemy within range <2 ..... @TODO
     }
