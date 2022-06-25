@@ -14,12 +14,7 @@ public class Blizzard extends SpecialAbillity{
         this.hitsCount=hitsCount;
         this.abilityRange=abilityRange;
     }
-    public void leveledUp(int level)
-    {
-        manaPool=manaPool+25*level;
-        currentMana=Math.min(currentMana+manaPool/4,manaPool);
-        spellPower=spellPower+10*level;
-    }
+
     public boolean canAttack()
     {
         return currentMana>=manaCost;
@@ -36,12 +31,25 @@ public class Blizzard extends SpecialAbillity{
         spellPower = spellPower +(10 * playerLevel);
 
     }
+    public int getHitsCount() {
+        return hitsCount;
+    }
+
 
     // on tick needs level.
     //then every onTick needs level.
     @Override
     public void onTick(int playerLevel) {
         currentMana = Math.min(manaPool,currentMana+1*playerLevel);
+
+    }
+
+    @Override
+    public void onAbillityCast(Player player){
+        currentMana=currentMana-manaCost;
+        player.getDistance();
+        player.attack();
+
 
     }
 }

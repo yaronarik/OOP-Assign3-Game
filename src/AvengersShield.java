@@ -31,6 +31,11 @@ public class AvengersShield extends SpecialAbillity{
 
     }
 
+    public void onAbillityCast()
+    {
+        remainingCooldown=abilityCooldown;
+    }
+
     @Override
     public void onTick() {
         if(remainingCooldown>0){

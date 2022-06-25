@@ -23,4 +23,14 @@ public abstract class Tile {
     public void setTile(char tile) {
         this.tile = tile;
     }
+
+    public int getDistance(Tile t)
+    {
+        //calulate the range between tiles
+
+    }
+    public Enemy[] getClose(int abillityRange)
+    {
+
+    }
 }

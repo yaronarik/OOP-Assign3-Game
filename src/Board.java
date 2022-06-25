@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Board {
     private List<List<Tile>> tiles; //TODO - check if can dimesion array
+    private List<Enemy> enemies;
 
     private int rowCounter=0;
     public Board(Tile[][] tiles)

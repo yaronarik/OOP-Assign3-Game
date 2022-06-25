@@ -12,5 +12,15 @@ public class Mage extends Player{
     @Override
     public void tryAbillityCast() {
 
+        if(!specialAbillity.canAttack())
+            return;
+        else
+            onAbillityCast();
     }
+    public void onAbillityCast( )
+    {
+        this.specialAbillity.onAbillityCast(this);
+
+    }
+
 }
