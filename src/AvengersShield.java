@@ -37,7 +37,7 @@ public class AvengersShield extends SpecialAbillity{
     }
 
     @Override
-    public void onTick() {
+    public void onTick(int playerLevel) {
         if(remainingCooldown>0){
             remainingCooldown--;
         }
