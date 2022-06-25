@@ -28,4 +28,20 @@ public class Blizzard extends SpecialAbillity{
     {
         currentMana=currentMana-manaCost;
     }
+
+    @Override
+    public void changeSpecialAbillityWhenLevelUp(int playerLevel) {
+        manaPool = manaPool + (25 * playerLevel);
+        currentMana = Math.min(currentMana+(manaPool/4), manaPool); // Casting int to double?
+        spellPower = spellPower +(10 * playerLevel);
+
+    }
+
+    // on tick needs level.
+    //then every onTick needs level.
+    @Override
+    public void onTick(int playerLevel) {
+        currentMana = Math.min(manaPool,currentMana+1*playerLevel);
+
+    }
 }

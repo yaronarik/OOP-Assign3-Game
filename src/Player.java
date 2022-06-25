@@ -1,6 +1,6 @@
 public abstract class Player extends Unit{
    private int exp;
-   private int level;
+   protected int level;
    protected SpecialAbillity specialAbillity;
    public Player(int x,int y,String name,int healthPool,int attackPoints,int defensePoints,SpecialAbillity spec)
    {

@@ -25,7 +25,16 @@ public class AvengersShield extends SpecialAbillity{
     }
 
     @Override
-    public void changeSpecialAbillityWhenLevelUp() {
+    public void changeSpecialAbillityWhenLevelUp(int level) {
+
         remainingCooldown=0;
+
+    }
+
+    @Override
+    public void onTick() {
+        if(remainingCooldown>0){
+            remainingCooldown--;
+        }
     }
 }
