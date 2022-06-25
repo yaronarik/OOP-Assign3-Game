@@ -10,7 +10,7 @@ public abstract class Unit extends Tile{
     {
         super(x,y,ch);
         this.name=name;
-        healthPool=healthPool;
+        this.healthPool=healthPool;
         healthAmount=healthPool;
         this.attackPoints=attackPoints;
         this.defensePoints=defensePoints;

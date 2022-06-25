@@ -25,7 +25,5 @@ public class Warrior extends Player{
         super.levelUp();
         // warrior things to levelup
         this.specialAbillity.changeSpecialAbillityWhenLevelUp(); //
-
-
     }
 }
