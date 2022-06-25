@@ -14,7 +14,7 @@ public class Warrior extends Player{
         if(!specialAbillity.canAttack())
             return;
         else
-            makeAbillityCast();
+            specialAbillity.changeSpecialAbillityWhenLevelUp(level);
     }
     // I think that every thing that connect
     // to ability should live in ability class
@@ -35,6 +35,6 @@ public class Warrior extends Player{
 
     // Observer
     public void onTick(){
-        specialAbillity.onTick();
+        specialAbillity.onTick(level);
     }
 }

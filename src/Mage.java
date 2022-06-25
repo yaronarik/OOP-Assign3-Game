@@ -13,4 +13,7 @@ public class Mage extends Player{
     public void tryAbillityCast() {
 
     }
+    public void onTick(){
+        specialAbillity.onTick(level);
+    }
 }
