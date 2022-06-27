@@ -10,14 +10,15 @@ public class Monster extends Enemy{
         this.visionRange=visionRange;
     }
 
-    public void onTick(Player player)
+    public void onTick()
     {
-
-        if(this.getDistance(player)<visionRange)
+        Player player= getPlayer.get();
+        Position playerPosition= player.getPos();
+        if(this.getPos().getDistance(playerPosition)<visionRange)
         {
-            Position p=player.getPos();
-            int dX=this.getPos().getX()-p.getX();
-            int dY=this.getPos().getY()-p.getY();
+//            Position p=playerPosition;
+            int dX=this.getPos().getX()-playerPosition.getX();
+            int dY=this.getPos().getY()-playerPosition.getY();
             if(Math.abs(dX) > Math.abs(dY))
             {
                 if(dX>0) {

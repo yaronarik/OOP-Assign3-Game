@@ -1,7 +1,9 @@
+import java.util.List;
+
 public abstract class Player extends Unit{
    private int exp;
    protected int level;
-
+   private InputRead inputRead;
 
    public Player(String name,int healthPool,int attackPoints,int defensePoints)
    {
@@ -30,9 +32,37 @@ public abstract class Player extends Unit{
        this.attackPoints+=4*level;
        this.defensePoints+=1*level;
    }
-   public  abstract void onAbillityCast();
+   public  abstract void onAbillityCast(List<Enemy> enemies);
 
-   public abstract  void onTick();
+   public  void onTick(List<Enemy> enemies)
+   {
+       char ch=inputRead.read();
+       ch=Character.toLowerCase(ch);
+       switch (ch)
+       {
+           case 'w' :
+               this.interact(gta.get(this.getPos().getX()-1,this.getPos().getY()));
+               break;
+           case 's' :
+               this.interact(gta.get(this.getPos().getX()+1,this.getPos().getY()));
+               break;
+           case 'd' :
+               this.interact(gta.get(this.getPos().getX(),this.getPos().getY()+1));
+               break;
+           case 'a' :
+               this.interact(gta.get(this.getPos().getX(),this.getPos().getY()-1));
+               break;
+           case 'q' :
+               break;
+           case 'e' :
+               onAbillityCast(enemies);
+               break;
+           default:
+               onTick(enemies);
+               break;
+       }
+
+   }
 
 //   public void move()
 //   {
@@ -80,7 +110,9 @@ public abstract class Player extends Unit{
 
     public String description()
     {
-        return super.description() + " level=" + level + ", exp=" + exp;
+        return super.description() + "Level: " + level + "            Experience: " + exp ;
+
+
     }
     public abstract String basicInformation();
 
@@ -90,4 +122,10 @@ public abstract class Player extends Unit{
    }
 
 
+    public void initialize(Position p,DeathCallBack pb,MessageCallBack msc,SwapCallBack swb,getTileAtPlaceCallBack gta,InputRead inp)
+    {
+        super.initialize(p,pb,msc,swb,gta);
+        inputRead=inp;
+
+    }
 }

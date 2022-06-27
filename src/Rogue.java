@@ -42,7 +42,7 @@ public class Rogue extends Player{
 
     public String description()
     {
-        return "Rouge: " + super.description() + ", with currentEnergy=" +currentEnergy;
+        return  super.description() + "abillityCost: " +cost +"              currentEnergy: " +currentEnergy;
     }
     public String basicInformation()
     {

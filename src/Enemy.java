@@ -1,7 +1,7 @@
 public abstract class Enemy extends Unit {
 
     private int expValue;
-
+    protected getPlayer getPlayer;
 
     public Enemy( char ch, String name, int healthPool, int attackPoints, int defensePoints, int expValue) {
         super( ch, name, healthPool, attackPoints, defensePoints);
@@ -51,11 +51,17 @@ public abstract class Enemy extends Unit {
         deathCallBack.call();
 
     }
-    public abstract void onTick(Player p);
+    public abstract void onTick();
 
     public String description()
     {
        return   super.description() + " with ExpValue=" +this.expValue;
+    }
+
+    public void initialize(Position p, DeathCallBack deathCallBack, MessageCallBack messageCallBack, SwapCallBack swapCallBack, getTileAtPlaceCallBack getTileAtPlaceCallBack, getPlayer getPlayer)
+    {
+        super.initialize(p,deathCallBack,messageCallBack,swapCallBack,getTileAtPlaceCallBack);
+        this.getPlayer=getPlayer;
     }
 
 }

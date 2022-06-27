@@ -23,6 +23,7 @@ public abstract class Unit extends Tile   {
     public abstract void visit(Player p);
     public abstract void visit(Enemy e);
 
+
     public  void visit(Wall wall)
     {
         return;
@@ -51,10 +52,12 @@ public abstract class Unit extends Tile   {
     }
     public  String description()
     {
-        return this.name + " representad by " + this.tile + " at Position " + this.pos.toString() +
-                " with " + heal.toString() + ". attackPoints=" +attackPoints + ", defensePoints=" + defensePoints;
+        return this.name +"              Health:" + heal.description()+"        Attack: " +attackPoints+"              Defense: "+ defensePoints+"              ";
+
     }
 
+    //Jon Snow                Health: 300/300         Attack: 30              Defense: 4              Level: 1
+    //        Experience: 0/50                Cooldown: 0/3
     public void battle(Unit u)
     {
         int attackRolls=(int) (Math.random() *this.attackPoints);
@@ -66,6 +69,7 @@ public abstract class Unit extends Tile   {
         }
 
     }
+    public abstract void onTick();
 
     public void initialize(Position p,DeathCallBack pb,MessageCallBack msc,SwapCallBack swb,getTileAtPlaceCallBack gta)
     {

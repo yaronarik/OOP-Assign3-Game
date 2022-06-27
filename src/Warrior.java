@@ -17,7 +17,7 @@ public class Warrior extends Player{
 
     // I think that every thing that connect
     // to ability should live in ability class
-    public void onAbillityCast()
+    public void onAbillityCast(List<Enemy> enemies)
     {
         if(remainingCooldown>0)
             return; //  TODO throw exception
@@ -47,7 +47,7 @@ public class Warrior extends Player{
 
     public String description()
     {
-        return "Warrior: " + super.description() + ", remainingCoolDown=" +remainingCooldown;
+        return super.description() + "RemainingCoolDown: " +remainingCooldown + "/" + abilityCooldown;
     }
     public String basicInformation()
     {

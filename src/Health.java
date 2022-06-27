@@ -35,4 +35,8 @@ public class Health {
     {
         return "healthPool= " + healthPool + ", healthAmount= " +healthAmount;
     }
+
+    public String description() {
+        return healthAmount + "/" +healthPool;
+    }
 }

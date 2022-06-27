@@ -14,15 +14,16 @@ public class Trap extends Enemy{
         ticksCount=0;
         visible=true;
     }
-    public void onTick(Player p)
+    public void onTick()
     {
 
+        Player player= getPlayer.get();
        if(ticksCount==visibilityTime+invisibilityTime)
            ticksCount=0;
        else
            ticksCount++;
-       if(this.getPos().getDistance(p.getPos())<2)
-           interact(p);
+       if(this.getPos().getDistance(player.getPos())<2)
+           interact(player);
         visible= ticksCount<visibilityTime;
 
     }

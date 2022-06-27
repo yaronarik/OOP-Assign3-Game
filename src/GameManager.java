@@ -48,14 +48,9 @@ public class GameManager {
             while(enemies.size()>0 && !player.isDied())
             {
                 System.out.println(board.toString());
-                char ch=scanner.next().charAt(0);
-                ch=Character.toLowerCase(ch);
-                switch (ch)
-                {
-                    case 'w' :
-                        player.interact();
-
-                }
+                player.onTick();
+                for(Enemy e : enemies)
+                    e.onTick();
 
             }
 
@@ -99,7 +94,7 @@ public class GameManager {
                     default:
                         Enemy e=gameInit.getEnemyType(c);
                         boardTiles[i][j]= e;
-                        e.initialize(new Position(i,j),()->removeEnemy(e),( message) -> System.out.println(message),( t)-> board.swap(e,t),( x, y) -> board.getTileInPos(new Position(x,y)) );
+                        e.initialize(new Position(i,j),()->removeEnemy(e),( message) -> System.out.println(message),( t)-> board.swap(e,t),( x, y) -> board.getTileInPos(new Position(x,y)),()->player);
                         break;
 
                 }
