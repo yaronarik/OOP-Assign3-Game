@@ -1,25 +1,28 @@
+import java.util.LinkedList;
+import java.util.List;
+
 public class Warrior extends Player{
+    private int abilityCooldown;
+    private int remainingCooldown;
 
 
-
-    public Warrior(int x,int y,String name,int healthPool,int attackPoints,int defensePoints,SpecialAbillity spec, int cooldown)
+    public Warrior(String name,int healthPool,int attackPoints,int defensePoints, int cooldown)
     {
-        super(x,y,name,healthPool,attackPoints,defensePoints,new AvengersShield(cooldown));
+        super(name,healthPool,attackPoints,defensePoints);
+        abilityCooldown=cooldown;
+        remainingCooldown=0;
+
     }
 
-    public void tryAbillityCast()
-    {
-        //throw new Execption("not enough resources");
-        if(!specialAbillity.canAttack())
-            return;
-        else
-            onAbillityCast();
-    }
+
     // I think that every thing that connect
     // to ability should live in ability class
     public void onAbillityCast()
     {
-        specialAbillity.onAbillityCast();
+        if(remainingCooldown>0)
+            return; //  TODO throw exception
+        Enemy[] enemisInRange=this.getClose(3);
+       remainingCooldown=abilityCooldown;
         heal.setHealthAmount(Math.min(heal.getHealthAmount()+10*defensePoints,heal.getHealthPool()));
         //randomlyHitEnemy
 
@@ -33,11 +36,22 @@ public class Warrior extends Player{
         attackPoints = attackPoints +(2 * level);
         defensePoints = defensePoints +(1 * level);
         // warrior things to levelup
-        this.specialAbillity.changeSpecialAbillityWhenLevelUp(level); //
+       remainingCooldown=0;//
     }
 
     // Observer
     public void onTick(){
-        specialAbillity.onTick();
+        if(remainingCooldown>0)
+            remainingCooldown--;
+    }
+
+    public String description()
+    {
+        return "Warrior: " + super.description() + ", remainingCoolDown=" +remainingCooldown;
+    }
+    public String basicInformation()
+    {
+        return "Warrior : " + this.name + ", health : " + heal.getHealthPool() + ", attackPoints : " + attackPoints + ", defensePoints : " + defensePoints +
+                ", coolDown :  " + abilityCooldown + "." ;
     }
 }

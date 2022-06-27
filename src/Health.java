@@ -30,4 +30,9 @@ public class Health {
     public void setHealthAmount(int healthAmount) {
         this.healthAmount = healthAmount;
     }
+
+    public String toString()
+    {
+        return "healthPool= " + healthPool + ", healthAmount= " +healthAmount;
+    }
 }
