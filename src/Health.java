@@ -28,7 +28,10 @@ public class Health {
     }
 
     public void setHealthAmount(int healthAmount) {
-        this.healthAmount = healthAmount;
+        if(healthAmount<this.healthPool)
+            this.healthAmount = healthPool;
+        else
+            this.healthAmount=healthAmount;
     }
 
     public String toString()

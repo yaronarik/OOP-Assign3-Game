@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Rogue extends Player{
 
     private int currentEnergy;
@@ -29,13 +31,20 @@ public class Rogue extends Player{
     public void onAbillityCast()
     {
         if(currentEnergy<cost)
-            return; // throw new Exception
+           messageCallBack.send("dont enough resources for abillity cast, currentEnergy is :" + currentEnergy + " but manaCost is : " +cost);
         currentEnergy-=cost;
-        Enemy[] enemies=getClose(2);
-        for(Enemy e : enemies)
+        List<Enemy> enemiesInRange=getEnemiesInRange.get(2);
+        for(Enemy e : enemiesInRange)
         {
-            // deal damage equals to rouge' attacks points
-            //each enemy will try defend itself
+            int attackRolls=attackPoints;
+            int defenseRolls= (int) ( Math.random() * e.defensePoints);
+            if(attackRolls>defenseRolls) {
+                e.getDamage(attackRolls - defenseRolls);
+                if (e.isDied()) {
+                    gainExpAndLevelUpIfNeed(e.getExpValue());
+                    e.onDeath();
+                }
+            }
         }
 
     }

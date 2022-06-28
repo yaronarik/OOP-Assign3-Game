@@ -46,7 +46,12 @@ public abstract class Unit extends Tile   {
     {
         this.heal.setHealthAmount(heal.getHealthAmount()-dmg);
     }
-    public abstract void onDeath();
+    public void onDeath()
+    {
+        //callBack to board
+        deathCallBack.call();
+
+    }
     public String getName() {
         return name;
     }

@@ -17,14 +17,31 @@ public class Warrior extends Player{
 
     // I think that every thing that connect
     // to ability should live in ability class
-    public void onAbillityCast(List<Enemy> enemies)
+    public void onAbillityCast()
     {
         if(remainingCooldown>0)
-            return; //  TODO throw exception
-        Enemy[] enemisInRange=this.getClose(3);
-       remainingCooldown=abilityCooldown;
+            messageCallBack.send("cant do abillityCast, remaining coolDown is : " + remainingCooldown );
+        remainingCooldown=abilityCooldown;
         heal.setHealthAmount(Math.min(heal.getHealthAmount()+10*defensePoints,heal.getHealthPool()));
         //randomlyHitEnemy
+        List<Enemy> enemiesInRange=getEnemiesInRange.get(3);
+
+
+        int random=(int)(Math.random()*enemiesInRange.size());
+        //TODO check if monster should defend itselef
+        Enemy e=enemiesInRange.get(random);
+        int attackRolls= (int)(0.1*heal.getHealthPool());
+        int defenseRolls=  (int) ( Math.random() * e.defensePoints);
+        if(attackRolls>defenseRolls)
+        {
+            e.getDamage(attackRolls-defenseRolls);
+            if(e.isDied()) {
+                gainExpAndLevelUpIfNeed(e.getExpValue());
+                e.onDeath();
+            }
+
+        }
+
 
     }
 

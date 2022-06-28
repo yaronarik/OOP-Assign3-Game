@@ -45,12 +45,7 @@ public abstract class Enemy extends Unit {
         }
 
     }
-    public void onDeath()
-    {
-        //callBack to board
-        deathCallBack.call();
 
-    }
     public abstract void onTick();
 
     public String description()

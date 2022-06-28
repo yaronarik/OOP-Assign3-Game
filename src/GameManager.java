@@ -14,18 +14,20 @@ public class GameManager {
     private Player player;
     private LinkedList<Enemy> enemies;
     private boolean gameIsDone=false;
+    private Scanner scanner;
 
 
     public GameManager(GameInit gameInit)
     {
         this.gameInit=gameInit;
+        scanner=new Scanner(System.in);
 
     }
 
 
     public void run(String dir)
     {
-        Scanner scanner=new Scanner(System.in);
+
         ReadFromFile reader = new ReadFromFile();
         long count=0;
         try (Stream<Path> files = Files.list(Paths.get(dir))) {
@@ -49,8 +51,14 @@ public class GameManager {
             {
                 System.out.println(board.toString());
                 player.onTick();
-                for(Enemy e : enemies)
+                for(Enemy e : enemies) {
                     e.onTick();
+                    if(player.isDied()) {
+                        gameIsDone = true;
+                        break;
+                    }
+
+                }
 
             }
 
@@ -89,7 +97,7 @@ public class GameManager {
                         break;
                     case '@' :
                         boardTiles[i][j]=player;
-                        player.initialize(new Position(i,j),()-> this.playerDeath(),( message) -> System.out.println(message),( t)-> board.swap(player,t),( x, y) -> board.getTileInPos(new Position(x,y) ));
+                        player.initialize(new Position(i,j),()-> this.playerDeath(),( message) -> System.out.println(message),( t)-> board.swap(player,t),( x, y) -> board.getTileInPos(new Position(x,y) ),()-> scanner.next().charAt(0),(range)->getEnemiesInRange(player,range));
                         break;
                     default:
                         Enemy e=gameInit.getEnemyType(c);
@@ -116,6 +124,17 @@ public class GameManager {
     {
         enemies.remove(e);
         board.remove(e);
+    }
+    private List<Enemy> getEnemiesInRange(Player p,int range)
+    {
+        List<Enemy> closeEnemies=new LinkedList<Enemy>();
+        for(Enemy e: enemies)
+        {
+            if(board.range(p.getPos(),e.getPos())<range)
+                closeEnemies.add(e);
+        }
+        return closeEnemies;
+
     }
 
 

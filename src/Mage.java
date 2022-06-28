@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.List;
 
 public class Mage extends Player{
     private int manaPool;
@@ -30,16 +31,29 @@ public class Mage extends Player{
 
     public void onAbillityCast( )
     {
+
         if(currentMana<manaCost)
-            return; //TODO throw exception
+           messageCallBack.send("dont enough mana for special abillity");
         currentMana=currentMana-manaCost;
         int hits=0;
-        while(hits<hitsCount && getClose(abilityRange).length>0);
+        List<Enemy> enemies=getEnemiesInRange.get(abilityRange);
+        while(hits<hitsCount && enemies.size() >0);
         {
-            Enemy[] enemies = getClose(abilityRange);
-            int random = (int) (Math.random()*enemies.length);
+            int random = (int) (Math.random()*enemies.size());
             // deal damage to enemies[random]
+            int defenseRolls= (int) ( Math.random() * enemies.get(random).defensePoints);
+            int attackRolls=spellPower;
+            Enemy e=enemies.get(random);
+            if(attackRolls>defenseRolls) {
+                e.getDamage(attackRolls - defenseRolls);
+                if (e.isDied()) {
+                    gainExpAndLevelUpIfNeed(e.getExpValue());
+                    e.onDeath();
+
+                }
+            }
             hits++;
+            enemies=getEnemiesInRange.get(abilityRange);
         }
     }
 

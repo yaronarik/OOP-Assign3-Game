@@ -4,6 +4,7 @@ public abstract class Player extends Unit{
    private int exp;
    protected int level;
    private InputRead inputRead;
+   protected getEnemiesInRange getEnemiesInRange;
 
    public Player(String name,int healthPool,int attackPoints,int defensePoints)
    {
@@ -32,9 +33,9 @@ public abstract class Player extends Unit{
        this.attackPoints+=4*level;
        this.defensePoints+=1*level;
    }
-   public  abstract void onAbillityCast(List<Enemy> enemies);
+   public  abstract void onAbillityCast();
 
-   public  void onTick(List<Enemy> enemies)
+   public  void onTick()
    {
        char ch=inputRead.read();
        ch=Character.toLowerCase(ch);
@@ -55,10 +56,10 @@ public abstract class Player extends Unit{
            case 'q' :
                break;
            case 'e' :
-               onAbillityCast(enemies);
+               onAbillityCast();
                break;
            default:
-               onTick(enemies);
+               onTick();
                break;
        }
 
@@ -98,6 +99,7 @@ public abstract class Player extends Unit{
             if(e.isDied())
             {
                 gainExpAndLevelUpIfNeed(e.getExpValue());
+                //TODO maybe call swap and check cronolog
                 Position p= e.getPos();
                 e.onDeath();
                 this.setPos(p);
@@ -116,16 +118,13 @@ public abstract class Player extends Unit{
     }
     public abstract String basicInformation();
 
-   public void onDeath()
-   {
-       this.deathCallBack.call();
-   }
 
 
-    public void initialize(Position p,DeathCallBack pb,MessageCallBack msc,SwapCallBack swb,getTileAtPlaceCallBack gta,InputRead inp)
+
+    public void initialize(Position p,DeathCallBack pb,MessageCallBack msc,SwapCallBack swb,getTileAtPlaceCallBack gta,InputRead inp,getEnemiesInRange getEnemiesInRange)
     {
         super.initialize(p,pb,msc,swb,gta);
         inputRead=inp;
-
+        this.getEnemiesInRange=getEnemiesInRange;
     }
 }
