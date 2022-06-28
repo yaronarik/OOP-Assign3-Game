@@ -39,6 +39,8 @@ public class Rogue extends Player{
             int attackRolls=attackPoints;
             int defenseRolls= (int) ( Math.random() * e.defensePoints);
             if(attackRolls>defenseRolls) {
+                //TODO check when damage<=0
+                sendDamageNotification(e,attackRolls-defenseRolls);
                 e.getDamage(attackRolls - defenseRolls);
                 if (e.isDied()) {
                     gainExpAndLevelUpIfNeed(e.getExpValue());

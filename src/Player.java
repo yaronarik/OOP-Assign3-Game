@@ -75,39 +75,20 @@ public abstract class Player extends Unit{
        u.visit(this);
    }
     public void visit(Player p){
-       return; //TODO throw new Exception();
-    }
+        messageCallBack.send("error,player visit player");    }
     public void visit(Enemy e)
     {
         super.battle(e);
         if(e.isDied())
         {
-            swapCallBack.swap(e);
             gainExpAndLevelUpIfNeed(e.getExpValue());
+            swapCallBack.swap(e);
             e.onDeath();
         }
     }
 
 
-    public void battle(Enemy e)
-    {
-        int attackRolls=(int) (Math.random() *this.attackPoints);
-        int defenseRolls= (int) ( Math.random() * e.defensePoints);
-        if(attackRolls -defenseRolls > 0)
-        {
-            e.getDamage(attackRolls-defenseRolls);
-            if(e.isDied())
-            {
-                gainExpAndLevelUpIfNeed(e.getExpValue());
-                //TODO maybe call swap and check cronolog
-                Position p= e.getPos();
-                e.onDeath();
-                this.setPos(p);
 
-            }
-        }
-
-    }
 
 
     public String description()

@@ -31,9 +31,10 @@ public class Warrior extends Player{
         //TODO check if monster should defend itselef
         Enemy e=enemiesInRange.get(random);
         int attackRolls= (int)(0.1*heal.getHealthPool());
-        int defenseRolls=  (int) ( Math.random() * e.defensePoints);
+        int defenseRolls=  e.rollDefensePoints();
         if(attackRolls>defenseRolls)
         {
+            sendDamageNotification(e,attackRolls-defenseRolls);
             e.getDamage(attackRolls-defenseRolls);
             if(e.isDied()) {
                 gainExpAndLevelUpIfNeed(e.getExpValue());

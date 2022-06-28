@@ -32,25 +32,12 @@ public abstract class Enemy extends Unit {
         return expValue;
     }
 
-    public void battle(Player p) {
-        int attackRolls = (int) (Math.random() * this.attackPoints);
-        int defenseRolls = (int) (Math.random() * p.defensePoints);
-        if (attackRolls - defenseRolls > 0) {
-            p.getDamage(attackRolls - defenseRolls);
-            if (p.isDied()) {
-                p.onDeath();
-
-
-            }
-        }
-
-    }
 
     public abstract void onTick();
 
     public String description()
     {
-       return   super.description() + " with ExpValue=" +this.expValue;
+       return   super.description() + "ExpValue: " +this.expValue +"           ";
     }
 
     public void initialize(Position p, DeathCallBack deathCallBack, MessageCallBack messageCallBack, SwapCallBack swapCallBack, getTileAtPlaceCallBack getTileAtPlaceCallBack, getPlayer getPlayer)

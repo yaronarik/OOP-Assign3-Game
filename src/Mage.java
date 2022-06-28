@@ -40,11 +40,13 @@ public class Mage extends Player{
         while(hits<hitsCount && enemies.size() >0);
         {
             int random = (int) (Math.random()*enemies.size());
-            // deal damage to enemies[random]
-            int defenseRolls= (int) ( Math.random() * enemies.get(random).defensePoints);
-            int attackRolls=spellPower;
             Enemy e=enemies.get(random);
+            // deal damage to enemies[random]
+            int defenseRolls= e.rollDefensePoints();
+            int attackRolls=spellPower;
+
             if(attackRolls>defenseRolls) {
+                sendDamageNotification(e,attackRolls-defenseRolls);
                 e.getDamage(attackRolls - defenseRolls);
                 if (e.isDied()) {
                     gainExpAndLevelUpIfNeed(e.getExpValue());

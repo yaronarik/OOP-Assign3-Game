@@ -22,7 +22,7 @@ public class Monster extends Enemy{
             if(Math.abs(dX) > Math.abs(dY))
             {
                 if(dX>0) {
-                    interact(gta.get(this.pos.getX() - 1, this.pos.getY())); // TODO change to move left
+                    interact(gta.get(this.pos.getX() - 1, this.pos.getY()));
                 }
 
                 else
@@ -54,7 +54,7 @@ public class Monster extends Enemy{
 
     @Override
     public String description() {
-        return "Monster " + super.description() +" with visionRange=" + this.visionRange;
+        return super.description() + "Vision Range: " +visionRange;
 
     }
 }

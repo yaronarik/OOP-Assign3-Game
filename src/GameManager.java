@@ -42,7 +42,7 @@ public class GameManager {
         boolean levelIsDone=false;
         while(!gameIsDone)
         {
-            System.out.println("Choose your player by Number");
+            System.out.println("Choose your player by Number:");
             System.out.println(gameInit.getPlayersOptions());
             int playerNumber=scanner.nextInt();
             player =gameInit.getPlayerType(playerNumber);

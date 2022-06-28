@@ -63,16 +63,20 @@ public abstract class Unit extends Tile   {
 
     //Jon Snow                Health: 300/300         Attack: 30              Defense: 4              Level: 1
     //        Experience: 0/50                Cooldown: 0/3
-    public void battle(Unit u)
+
+
+
+    public int rollDefensePoints()
     {
-        int attackRolls=(int) (Math.random() *this.attackPoints);
-        int defenseRolls= (int) ( Math.random() * u.defensePoints);
-        if(attackRolls -defenseRolls > 0)
-        {
-            u.getDamage(attackRolls-defenseRolls);
-
-        }
-
+        int defenseRolls= (int) ( Math.random() * this.defensePoints);
+        messageCallBack.send(this.name + " rolled " +defenseRolls + " points.");
+        return defenseRolls;
+    }
+    public int rollAttackPoints()
+    {
+        int attackRolls=(int) (Math.random() * this.attackPoints);
+        messageCallBack.send(this.name + " rolled " +attackRolls + " points.");
+        return attackRolls;
     }
     public abstract void onTick();
 
@@ -83,6 +87,32 @@ public abstract class Unit extends Tile   {
         this.messageCallBack=msc;
         this.swapCallBack=swb;
         this.gta=gta;
+    }
+    public void sendDamageNotification(Unit u,int damage)
+    {
+
+        messageCallBack.send(this.name + " dealt " + damage + " damage to " + u.name +".");
+
+    }
+    public void engageInCombatNotification(Unit u)
+    {
+        messageCallBack.send(this.name + " engaged in combat with " + u.name + ".");
+        messageCallBack.send(this.description());
+        messageCallBack.send(u.description());
+    }
+
+    public void battle(Unit u)
+    {
+        engageInCombatNotification(u);
+        int attackRolls=rollAttackPoints();
+        int defenseRolls= u.rollDefensePoints();
+        if(attackRolls -defenseRolls > 0)
+        {
+            sendDamageNotification(u,attackRolls-defenseRolls);
+            u.getDamage(attackRolls-defenseRolls);
+
+        }
+
     }
 
 

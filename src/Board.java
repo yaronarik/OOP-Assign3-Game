@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Board {
-    private List<Tile> tiles; //TODO - check if can dimesion array
+    private List<Tile> tiles;
     private List<Enemy> enemies;
 
     private Player player;
