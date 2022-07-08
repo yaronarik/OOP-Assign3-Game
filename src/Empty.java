@@ -1,12 +1,24 @@
 public class Empty extends Tile{
 
-    public Empty(int x,int y)
+    public Empty()
     {
-        super(x,y,'.');
+        super('.');
 
     }
 
 
+//    @Override
+//    public void visit(Player p) {
+//        return;
+//    }
+//
+//    @Override
+//    public void visit(Enemy e) {
+//        return;
+//    }
 
-
+    public void accept(Unit u)
+    {
+        u.visit(this);
+    }
 }
