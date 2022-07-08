@@ -10,6 +10,7 @@ public class Monster extends Enemy{
         this.visionRange=visionRange;
     }
 
+
     public void onTick()
     {
         Player player= getPlayer.get();

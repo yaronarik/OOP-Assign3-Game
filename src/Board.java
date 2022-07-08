@@ -55,8 +55,10 @@ public class Board {
                 res+= "\n";
                 count=0;
             }
-            else
+            else {
+
                 count++;
+            }
 
         }
         return res;

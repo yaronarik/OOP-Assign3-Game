@@ -57,7 +57,7 @@ public class Rogue extends Player{
     }
     public String basicInformation()
     {
-        return "Rouge : " + this.name + ", health : " + heal.getHealthPool() + ", attackPoints : " + attackPoints + ", defensePoints : " + defensePoints +
-                ", abillityCost  :  " + cost + ".";
+        return super.basicInformation()+
+                "\n\t abillityCost  :  " + cost ;
     }
 }

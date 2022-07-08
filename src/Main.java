@@ -1,17 +1,12 @@
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Scanner;
-
 public class Main {
 
     public static void main(String[] args)
     {
         GameInit gameInit=new GameInit();
         GameManager gameManager=new GameManager(gameInit);
-        gameManager.run(args[2]);
+        gameManager.run(args[0]);
 
             }
-
         }
 
 

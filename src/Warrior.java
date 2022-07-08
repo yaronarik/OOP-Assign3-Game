@@ -1,4 +1,3 @@
-import java.util.LinkedList;
 import java.util.List;
 
 public class Warrior extends Player{
@@ -65,11 +64,11 @@ public class Warrior extends Player{
 
     public String description()
     {
-        return super.description() + "RemainingCoolDown: " +remainingCooldown + "/" + abilityCooldown;
+        return super.description() + "    RemainingCoolDown: " +remainingCooldown + "/" + abilityCooldown;
     }
     public String basicInformation()
     {
-        return "Warrior : " + this.name + ", health : " + heal.getHealthPool() + ", attackPoints : " + attackPoints + ", defensePoints : " + defensePoints +
-                ", coolDown :  " + abilityCooldown + "." ;
+        return super.basicInformation()+
+                " \n\t coolDown:  " + abilityCooldown  ;
     }
 }

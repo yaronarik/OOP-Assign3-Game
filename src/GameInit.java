@@ -1,6 +1,5 @@
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 
 public class GameInit {
     private HashMap<Integer,Player> allPlayerOptions;
@@ -11,8 +10,8 @@ public class GameInit {
     public GameInit() {
         allPlayerOptions = new LinkedHashMap<>();
         addPlayers();
-        allEnemiesOptions = new LinkedHashMap<>();
-        addEnemies();
+        //allEnemiesOptions = new LinkedHashMap<>();
+        //addEnemies();
 
     }
     public Player getPlayerType(int i)
@@ -58,7 +57,7 @@ public class GameInit {
         String res="";
         for (Integer integer : allPlayerOptions.keySet())
         {
-            res.concat(String.valueOf(integer) + ". " + allPlayerOptions.get(integer).toString() + " .\n");
+            res+=integer.toString() + ". " + allPlayerOptions.get(integer).basicInformation() + " .\n";
         }
         return res;
     }

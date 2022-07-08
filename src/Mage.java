@@ -1,4 +1,3 @@
-import java.util.LinkedList;
 import java.util.List;
 
 public class Mage extends Player{
@@ -66,14 +65,14 @@ public class Mage extends Player{
 
     public String description()
     {
-        return "Mage: " + super.description() + ", with currentMana=" +currentMana;
+        return super.description() + ", with currentMana=" +currentMana;
     }
 
     public String basicInformation()
     {
-        return "Mage : " + this.name + ", health : " + heal.getHealthPool() + ", attackPoints : " + attackPoints + ", defensePoints : " + defensePoints +
-                ", manaPool  :  " + manaPool + ", manaCost : " + manaCost + ", spellPower : " +spellPower + ", hitsCount : "+hitsCount +", abillityRange :" +
-                abilityRange + ".";
+        return super.basicInformation()+
+                "\n\t manaPool: " + manaPool + "              manaCost: " + manaCost + "              spellPower: " +spellPower + "              hitsCount: "+hitsCount +"              abillityRange:" +
+                abilityRange;
     }
 
 }
