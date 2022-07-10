@@ -28,7 +28,7 @@ public class Health {
     }
 
     public void setHealthAmount(int healthAmount) {
-        if(healthAmount<this.healthPool)
+        if(healthAmount>this.healthPool)
             this.healthAmount = healthPool;
         else
             this.healthAmount=healthAmount;

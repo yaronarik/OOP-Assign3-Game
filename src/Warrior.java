@@ -58,6 +58,7 @@ public class Warrior extends Player{
 
     // Observer
     public void onTick(){
+        super.onTick();
         if(remainingCooldown>0)
             remainingCooldown--;
     }

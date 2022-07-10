@@ -14,6 +14,7 @@ public class Rogue extends Player{
     }
     public void onTick()
     {
+        super.onTick();
         currentEnergy = Math.min(currentEnergy+10,100);
 
     }

@@ -39,17 +39,21 @@ public class GameManager {
         }
         int levelInteger=0;
 
+        System.out.println("Choose your player by Number:");
+        System.out.println(gameInit.getPlayersOptions());
+        int playerNumber=scanner.nextInt();
+        player =gameInit.getPlayerType(playerNumber);
+        System.out.println("You have selected:");
+        System.out.println(player.name);
+
         boolean levelIsDone=false;
         while(!gameIsDone)
         {
-            System.out.println("Choose your player by Number:");
-            System.out.println(gameInit.getPlayersOptions());
-            int playerNumber=scanner.nextInt();
-            player =gameInit.getPlayerType(playerNumber);
             board=new Board(buildBoard(reader.readAllLines(dir + "\\level"+ String.valueOf(levelInteger) +".txt")));
             while(enemies.size()>0 && !player.isDied())
             {
                 System.out.println(board.toString());
+                System.out.println(player.description());
                 player.onTick();
                 for(Enemy e : enemies) {
                     e.onTick();

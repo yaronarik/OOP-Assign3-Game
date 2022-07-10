@@ -60,7 +60,7 @@ public class Mage extends Player{
 
     @Override
     public void onTick() {
-        currentMana = Math.min(manaPool,currentMana+1*level);
+        super.onTick(); currentMana = Math.min(manaPool,currentMana+1*level);
     }
 
     public String description()
