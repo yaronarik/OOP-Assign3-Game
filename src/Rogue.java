@@ -20,21 +20,27 @@ public class Rogue extends Player{
     }
 
     @Override
-    public void levelUp()
-    {
-        super.levelUp();
-        currentEnergy=100;
-        attackPoints = attackPoints+(3*level);
-
+    public void levelUp() {
+        while (exp >= 50 * level) {
+            super.levelUp();
+            currentEnergy = 100;
+            attackPoints = attackPoints + (3 * level);
+        }
     }
 
     @Override
     public void onAbillityCast()
     {
-        if(currentEnergy<cost)
-           messageCallBack.send("dont enough resources for abillity cast, currentEnergy is :" + currentEnergy + " but manaCost is : " +cost);
+        if(currentEnergy<cost) {
+            messageCallBack.send("dont enough resources for abillity cast, currentEnergy is :" + currentEnergy + " but manaCost is : " + cost);
+            return;
+        }
         currentEnergy-=cost;
         List<Enemy> enemiesInRange=getEnemiesInRange.get(2);
+        if(enemiesInRange.size() == 0){
+            messageCallBack.send("Ability hit missed all enemies because enemies are not in rage.");
+            return;
+        }
         for(Enemy e : enemiesInRange)
         {
             int attackRolls=attackPoints;

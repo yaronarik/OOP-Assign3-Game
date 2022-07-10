@@ -59,6 +59,7 @@ public class GameManager {
                     e.onTick();
                     if(player.isDied()) {
                         gameIsDone = true;
+
                         break;
                     }
 
@@ -208,6 +209,7 @@ public class GameManager {
     private void playerDeath() {
         player.setTile('X');
         gameIsDone=true;
+        System.out.println(board.toString());
         System.out.println("Game Over");
     }
     private void removeEnemy(Enemy e)

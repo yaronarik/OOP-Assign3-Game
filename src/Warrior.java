@@ -18,8 +18,11 @@ public class Warrior extends Player{
     // to ability should live in ability class
     public void onAbillityCast()
     {
-        if(remainingCooldown>0)
-            messageCallBack.send("cant do abillityCast, remaining coolDown is : " + remainingCooldown );
+        if(remainingCooldown>0) {
+            messageCallBack.send("cant do abillityCast, remaining coolDown is : " + remainingCooldown);
+            return;
+        }
+
         remainingCooldown=abilityCooldown;
         heal.setHealthAmount(Math.min(heal.getHealthAmount()+10*defensePoints,heal.getHealthPool()));
         //randomlyHitEnemy
@@ -28,6 +31,10 @@ public class Warrior extends Player{
 
         int random=(int)(Math.random()*enemiesInRange.size());
         //TODO check if monster should defend itselef
+        if(enemiesInRange.size() == 0){
+            messageCallBack.send("Ability hit missed all enemies because enemies are not in rage.");
+            return;
+        }
         Enemy e=enemiesInRange.get(random);
         int attackRolls= (int)(0.1*heal.getHealthPool());
         int defenseRolls=  e.rollDefensePoints();
@@ -47,17 +54,18 @@ public class Warrior extends Player{
 
     }
 
-    public void levelUp()
-    {
-        super.levelUp();
-        heal.setHealthPool(heal.getHealthPool()+5*level);
+    public void levelUp() {
+        while (exp >= 50 * level) {
+            super.levelUp();
+            heal.setHealthPool(heal.getHealthPool() + 5 * level);
 //        healthPool = healthPool +(5 * level);
-        attackPoints = attackPoints +(2 * level);
-        defensePoints = defensePoints +(1 * level);
-        // warrior things to levelup
-       remainingCooldown=0;//
-    }
+            attackPoints = attackPoints + (2 * level);
+            defensePoints = defensePoints + (1 * level);
+            // warrior things to levelup
+            remainingCooldown = 0;//
+        }
 
+    }
     // Observer
     public void onTick(){
         super.onTick();

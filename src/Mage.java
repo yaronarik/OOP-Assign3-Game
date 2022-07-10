@@ -20,22 +20,29 @@ public class Mage extends Player{
 
     }
 
-    public void levelUp(){
-        super.levelUp();
-        manaPool=manaPool+25*level;
-        currentMana=Math.min(currentMana+manaPool/4,manaPool);
-        spellPower=spellPower+10*level;
+    public void levelUp() {
+        while (exp >= 50 * level) {
+            super.levelUp();
+            manaPool = manaPool + 25 * level;
+            currentMana = Math.min(currentMana + manaPool / 4, manaPool);
+            spellPower = spellPower + 10 * level;
+        }
     }
 
 
     public void onAbillityCast( )
     {
 
-        if(currentMana<manaCost)
+        if(currentMana<manaCost){
            messageCallBack.send("dont enough mana for special abillity");
+           return;
+        }
         currentMana=currentMana-manaCost;
         int hits=0;
         List<Enemy> enemies=getEnemiesInRange.get(abilityRange);
+        if(enemies.size() == 0){
+            messageCallBack.send("Ability cast didn't hit anyone, enemies are not in rage.");
+        }
         while(hits<hitsCount && enemies.size() >0);
         {
             int random = (int) (Math.random()*enemies.size());
@@ -67,13 +74,13 @@ public class Mage extends Player{
 
     public String description()
     {
-        return super.description() + ", with currentMana=" +currentMana;
+        return super.description() + " with currentMana=" +currentMana;
     }
 
     public String basicInformation()
     {
         return super.basicInformation()+
-                "\n\t manaPool: " + manaPool + "              manaCost: " + manaCost + "              spellPower: " +spellPower + "              hitsCount: "+hitsCount +"              abillityRange:" +
+                "\n\t manaPool: " + manaPool + "              manaCost: " + manaCost + "              spellPower: " +spellPower + "              hitsCount: "+hitsCount +"              abilityRange:" +
                 abilityRange;
     }
 

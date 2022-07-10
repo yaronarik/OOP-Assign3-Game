@@ -1,5 +1,5 @@
 public abstract class Player extends Unit{
-   private int exp;
+   protected int exp;
    protected int level;
    private InputRead inputRead;
    protected getEnemiesInRange getEnemiesInRange;

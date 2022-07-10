@@ -38,7 +38,7 @@ public class Trap extends Enemy{
 
     public String description()
     {
-        return "Trap: " + super.description() + " isVisible: " + visible;
+        return "Trap: " + super.description() ;
     }
 
 }
