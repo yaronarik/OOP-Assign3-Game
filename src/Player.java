@@ -22,6 +22,7 @@ public abstract class Player extends Unit{
            return true;
        return false;
 
+
    }
    public void levelUp()
    {
@@ -77,11 +78,15 @@ public abstract class Player extends Unit{
     public void visit(Enemy e)
     {
         super.battle(e);
+
         if(e.isDied())
         {
-            gainExpAndLevelUpIfNeed(e.getExpValue());
+            if(gainExpAndLevelUpIfNeed(e.getExpValue())){
+                levelUp();
+            }
             swapCallBack.swap(e);
             e.onDeath();
+            messageCallBack.send(e.name+ " died. "+name+" gained "+e.getExpValue()+" experience. \n");
         }
     }
 
@@ -91,7 +96,7 @@ public abstract class Player extends Unit{
 
     public String description()
     {
-        return super.description() + "Level: " + level + "            Experience: " + exp ;
+        return super.description() + "Level: " + level + "            Experience: " + exp+"/"+50*level +"              " ;
 
 
     }

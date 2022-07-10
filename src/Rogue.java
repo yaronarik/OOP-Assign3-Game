@@ -44,7 +44,9 @@ public class Rogue extends Player{
                 sendDamageNotification(e,attackRolls-defenseRolls);
                 e.getDamage(attackRolls - defenseRolls);
                 if (e.isDied()) {
-                    gainExpAndLevelUpIfNeed(e.getExpValue());
+                    if(gainExpAndLevelUpIfNeed(e.getExpValue())){
+                        levelUp();
+                    }
                     e.onDeath();
                 }
             }

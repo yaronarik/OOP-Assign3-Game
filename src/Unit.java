@@ -110,12 +110,7 @@ public abstract class Unit extends Tile   {
         {
             sendDamageNotification(u,attackRolls-defenseRolls);
             u.getDamage(attackRolls-defenseRolls);
-
         }
 
     }
-
-
-
-
 }
