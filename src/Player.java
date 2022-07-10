@@ -33,10 +33,9 @@ public abstract class Player extends Unit{
    }
    public  abstract void onAbillityCast();
 
-   public  void onTick()
+   public  void onTick(String nextMove)
    {
        char ch=inputRead.read();
-       ch=Character.toLowerCase(ch);
        switch (ch)
        {
            case 'w' :

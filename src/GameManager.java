@@ -40,17 +40,19 @@ public class GameManager {
         int levelInteger=0;
 
         boolean levelIsDone=false;
+        System.out.println("Choose your player by Number:");
+        System.out.println(gameInit.getPlayersOptions());
+        int playerNumber=scanner.nextInt();
+        player =gameInit.getPlayerType(playerNumber);
+
         while(!gameIsDone)
         {
-            System.out.println("Choose your player by Number:");
-            System.out.println(gameInit.getPlayersOptions());
-            int playerNumber=scanner.nextInt();
-            player =gameInit.getPlayerType(playerNumber);
             board=new Board(buildBoard(reader.readAllLines(dir + "\\level"+ String.valueOf(levelInteger) +".txt")));
             while(enemies.size()>0 && !player.isDied())
             {
                 System.out.println(board.toString());
-                player.onTick();
+                String playerMoveStr = scanner.nextLine();
+                player.onTick(playerMoveStr);
                 for(Enemy e : enemies) {
                     e.onTick();
                     if(player.isDied()) {
