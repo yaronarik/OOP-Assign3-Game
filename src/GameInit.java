@@ -1,10 +1,8 @@
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
+import java.util.*;
 
 public class GameInit {
     private HashMap<Integer,Player> allPlayerOptions;
-    private HashMap<Character,Enemy> allEnemiesOptions;
+    private HashMap<Character, ArrayList<String>> allEnemiesOptions;
 
     private GameManager gameManager;
 
@@ -28,6 +26,9 @@ public class GameInit {
 
 
     private void addEnemies() {
+        allEnemiesOptions.put('s', {"Monster","s","Lannister Solider","80","8","3","3","25"});
+        allEnemiesOptions.put('k', new Arrays.asList({"Monster",'k',"Lannister Knight","200","14","8","4","50"}));
+
         allEnemiesOptions.put('s',new Monster('s',"Lannister Solider",80,8,3,3,25));
         allEnemiesOptions.put('k',new Monster('k',"Lannister Knight",200,14,8,4,50));
         allEnemiesOptions.put('q',new Monster('q',"Queen's Guard", 400,20,15,5,100 ));
