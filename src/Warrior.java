@@ -22,6 +22,7 @@ public class Warrior extends Player{
             messageCallBack.send("cant do abillityCast, remaining coolDown is : " + remainingCooldown);
             return;
         }
+        messageCallBack.send(this.name + " Casted Avenger’s Shield");
 
         remainingCooldown=abilityCooldown;
         heal.setHealthAmount(Math.min(heal.getHealthAmount()+10*defensePoints,heal.getHealthPool()));
@@ -37,6 +38,7 @@ public class Warrior extends Player{
         }
         Enemy e=enemiesInRange.get(random);
         int attackRolls= (int)(0.1*heal.getHealthPool());
+        messageCallBack.send(this.name + " Casts "+attackRolls);
         int defenseRolls=  e.rollDefensePoints();
         if(attackRolls>defenseRolls)
         {
@@ -50,8 +52,6 @@ public class Warrior extends Player{
             }
 
         }
-
-
     }
 
     public void levelUp() {

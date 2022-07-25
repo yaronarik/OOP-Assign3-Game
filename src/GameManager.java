@@ -81,8 +81,11 @@ public class GameManager {
 
 
             levelInteger++;
-            if(levelInteger>count)
-                gameIsDone=true;
+            if(levelInteger>=count) {
+                gameIsDone = true;
+                userInterface.print("You Win !!!");
+            }
+
         }
 
 

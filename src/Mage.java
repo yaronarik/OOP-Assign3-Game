@@ -37,19 +37,21 @@ public class Mage extends Player{
            messageCallBack.send("dont enough mana for special abillity");
            return;
         }
+        messageCallBack.send(this.name + " Casted Blizzard");
         currentMana=currentMana-manaCost;
         int hits=0;
         List<Enemy> enemies=getEnemiesInRange.get(abilityRange);
         if(enemies.size() == 0){
             messageCallBack.send("Ability cast didn't hit anyone, enemies are not in rage.");
         }
-        while(hits<hitsCount && enemies.size() >0);
+        while(hits<hitsCount && enemies.size() >0)
         {
             int random = (int) (Math.random()*enemies.size());
             Enemy e=enemies.get(random);
             // deal damage to enemies[random]
             int defenseRolls= e.rollDefensePoints();
             int attackRolls=spellPower;
+            messageCallBack.send(this.name + " Casts "+attackRolls);
 
             if(attackRolls>defenseRolls) {
                 sendDamageNotification(e,attackRolls-defenseRolls);

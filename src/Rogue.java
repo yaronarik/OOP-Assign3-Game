@@ -35,6 +35,7 @@ public class Rogue extends Player{
             messageCallBack.send("dont enough resources for abillity cast, currentEnergy is :" + currentEnergy + " but manaCost is : " + cost);
             return;
         }
+        messageCallBack.send(this.name + " Casted Fan of Knives");
         currentEnergy-=cost;
         List<Enemy> enemiesInRange=getEnemiesInRange.get(2);
         if(enemiesInRange.size() == 0){
@@ -44,6 +45,7 @@ public class Rogue extends Player{
         for(Enemy e : enemiesInRange)
         {
             int attackRolls=attackPoints;
+            messageCallBack.send(this.name + " Casts "+attackRolls);
             int defenseRolls= (int) ( Math.random() * e.defensePoints);
             if(attackRolls>defenseRolls) {
                 //TODO check when damage<=0
