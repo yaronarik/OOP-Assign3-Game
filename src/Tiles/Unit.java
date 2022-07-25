@@ -68,7 +68,7 @@ public abstract class Unit extends Tile   {
     }
     public  String description()
     {
-        return this.name +"              Attributes.Health:" + heal.description()+"        Attack: " +attackPoints+"              Defense: "+ defensePoints+"              ";
+        return this.name +"              Health:" + heal.description()+"        Attack: " +attackPoints+"              Defense: "+ defensePoints+"              ";
 
     }
 

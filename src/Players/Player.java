@@ -109,7 +109,7 @@ public abstract class Player extends Unit {
     }
     public  String basicInformation(){
        //return this.name + ", health : " + heal.getHealthPool() + ", attackPoints : " + attackPoints + ", defensePoints : " + defensePoints+ " ";
-        return this.name+"             Attributes.Health: "+heal.getHealthPool()+"/"+heal.getHealthPool()+"         Attack: "+attackPoints+"              Defense: "+defensePoints+"              Level: "+
+        return this.name+"             Health: "+heal.getHealthPool()+"/"+heal.getHealthPool()+"         Attack: "+attackPoints+"              Defense: "+defensePoints+"              Level: "+
                 level+"             Experience: 0/"+level*50;
     }
 
