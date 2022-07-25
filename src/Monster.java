@@ -15,7 +15,8 @@ public class Monster extends Enemy{
     {
         Player player= getPlayer.get();
         Position playerPosition= player.getPos();
-        if(this.getPos().getDistance(playerPosition)<visionRange)
+        double range =this.getPos().getDistance(playerPosition);
+        if(range<visionRange)
         {
 //            Position p=playerPosition;
             int dX=this.getPos().getX()-playerPosition.getX();
@@ -23,18 +24,18 @@ public class Monster extends Enemy{
             if(Math.abs(dX) > Math.abs(dY))
             {
                 if(dX>0) {
-                    interact(gta.get(this.pos.getX() - 1, this.pos.getY()));
+                    interact(gta.get(this.pos.getX() , this.pos.getY() - 1));
                 }
 
                 else
-                    interact(gta.get(this.pos.getX()+1,this.pos.getY()));
+                    interact(gta.get(this.pos.getX(),this.pos.getY() + 1));
 
             }
             else
                 if(dY>0)
-                    interact(gta.get(this.pos.getX(),this.pos.getY()+1));
+                    interact(gta.get(this.pos.getX() - 1,this.pos.getY()+1));
                 else
-                    interact(gta.get(this.pos.getX(),this.pos.getY()-1));
+                    interact(gta.get(this.pos.getX() + 1,this.pos.getY()-1));
 
         }
         else

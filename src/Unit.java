@@ -61,9 +61,6 @@ public abstract class Unit extends Tile   {
 
     }
 
-    //Jon Snow                Health: 300/300         Attack: 30              Defense: 4              Level: 1
-    //        Experience: 0/50                Cooldown: 0/3
-
 
 
     public int rollDefensePoints()
