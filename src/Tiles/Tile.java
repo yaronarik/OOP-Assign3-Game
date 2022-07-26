@@ -1,8 +1,10 @@
 package Tiles;
 
 import Attributes.Position;
+import VisitorPattern.Visited;
+import VisitorPattern.Visitor;
 
-public abstract class Tile implements Comparable<Tile> {
+public abstract class Tile implements Comparable<Tile>, Visited {
     protected char tile;
     protected Position pos;
 
@@ -47,7 +49,7 @@ public abstract class Tile implements Comparable<Tile> {
     public int compareTo(Tile tile) {
         return getPos().compareTo(tile.getPos());
     }
-    public abstract void accept(Unit u);
+    public abstract void accept(Visitor v);
 
 
     public String toString()

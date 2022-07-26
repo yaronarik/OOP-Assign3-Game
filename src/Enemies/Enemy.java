@@ -4,6 +4,7 @@ import Attributes.Position;
 import CallBacks.*;
 import Players.Player;
 import Tiles.Unit;
+import VisitorPattern.Visitor;
 
 public abstract class Enemy extends Unit {
 
@@ -17,8 +18,8 @@ public abstract class Enemy extends Unit {
 
 
 
-    public void accept(Unit u) {
-        u.visit(this);
+    public void accept(Visitor v) {
+        v.visit(this);
     }
 
     public void visit(Player p) {

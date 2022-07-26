@@ -1,5 +1,7 @@
 package Tiles;
 
+import VisitorPattern.Visitor;
+
 public class Empty extends Tile{
 
     public Empty()
@@ -19,8 +21,8 @@ public class Empty extends Tile{
 //        return;
 //    }
 
-    public void accept(Unit u)
+    public void accept(Visitor v)
     {
-        u.visit(this);
+        v.visit(this);
     }
 }

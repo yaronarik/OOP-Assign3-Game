@@ -8,8 +8,9 @@ import CallBacks.SwapCallBack;
 import CallBacks.getTileAtPlaceCallBack;
 import Enemies.Enemy;
 import Players.Player;
+import VisitorPattern.Visitor;
 
-public abstract class Unit extends Tile   {
+public abstract class Unit extends Tile implements Visitor {
     protected String name;
     protected int attackPoints;
     protected int defensePoints;
@@ -29,13 +30,13 @@ public abstract class Unit extends Tile   {
         this.defensePoints=defensePoints;
     }
 
-    public abstract void accept(Unit u);
+    public abstract void accept(Visitor v );
 //
     public abstract void visit(Player p);
     public abstract void visit(Enemy e);
 
 
-    public  void visit(Wall wall)
+    public void visit(Wall wall)
     {
         return;
     }

@@ -1,5 +1,7 @@
 package Tiles;
 
+import VisitorPattern.Visitor;
+
 public class Wall extends Tile{
 
     public Wall()
@@ -17,8 +19,8 @@ public class Wall extends Tile{
 //    }
 
 
-    public void accept(Unit u)
+    public void accept(Visitor v)
     {
-        u.visit(this);
+        v.visit(this);
     }
 }

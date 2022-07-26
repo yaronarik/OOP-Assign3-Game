@@ -4,6 +4,7 @@ import Attributes.Position;
 import CallBacks.*;
 import Enemies.Enemy;
 import Tiles.Unit;
+import VisitorPattern.Visitor;
 
 public abstract class Player extends Unit {
    protected int exp;
@@ -76,9 +77,9 @@ public abstract class Player extends Unit {
 //       In
 //   }
 
-   public void accept(Unit u)
+   public void accept(Visitor v)
    {
-       u.visit(this);
+       v.visit(this);
    }
     public void visit(Player p){
         messageCallBack.send("error,player visit player");    }
