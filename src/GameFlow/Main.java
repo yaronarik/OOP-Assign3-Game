@@ -6,7 +6,7 @@ public class Main {
     {
         GameInit gameInit=new GameInit();
         GameManager gameManager=new GameManager(gameInit);
-        gameManager.run(args[2]);
+        gameManager.run(args[0]);
 
             }
         }

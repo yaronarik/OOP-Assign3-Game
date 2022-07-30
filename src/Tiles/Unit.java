@@ -64,6 +64,10 @@ public abstract class Unit extends Tile implements Visitor {
         deathCallBack.call();
 
     }
+    public Health getHealth()
+    {
+        return heal;
+    }
     public String getName() {
         return name;
     }
@@ -81,11 +85,19 @@ public abstract class Unit extends Tile implements Visitor {
         messageCallBack.send(this.name + " rolled " +defenseRolls + " points.");
         return defenseRolls;
     }
+    public int getDefensePoints()
+    {
+        return defensePoints;
+    }
     public int rollAttackPoints()
     {
         int attackRolls=(int) (Math.random() * this.attackPoints);
         messageCallBack.send(this.name + " rolled " +attackRolls + " points.");
         return attackRolls;
+    }
+    public int getAttackPoints()
+    {
+        return attackPoints;
     }
     public abstract void onTick();
 
