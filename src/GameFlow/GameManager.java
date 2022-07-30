@@ -46,7 +46,18 @@ public class GameManager {
         };
 
     }
-
+    public UI getUserInterface()
+    {
+        return userInterface;
+    }
+    public Board getBoard()
+    {
+        return board;
+    }
+    public Player getPlayer()
+    {
+        return player;
+    }
 
     public void run(String dir)
     {
@@ -230,18 +241,18 @@ public class GameManager {
 
 
 
-    private void playerDeath() {
+    public void playerDeath() {
         player.setTile('X');
         gameIsDone=true;
         userInterface.print(board.toString());
         userInterface.print("Game Over");
     }
-    private void removeEnemy(Enemy e)
+    public void removeEnemy(Enemy e)
     {
         enemies.remove(e);
         board.remove(e);
     }
-    private List<Enemy> getEnemiesInRange(Player p, int range)
+    public List<Enemy> getEnemiesInRange(Player p, int range)
     {
         List<Enemy> closeEnemies=new LinkedList<Enemy>();
         for(Enemy e: enemies)
