@@ -23,6 +23,7 @@ public class GameManager {
     private boolean gameIsDone=false;
     private Scanner scanner;
     private UI userInterface;
+    private ReadFromFile reader;
 
 
     public GameManager(GameInit gameInit)
@@ -50,7 +51,7 @@ public class GameManager {
     public void run(String dir)
     {
 
-        ReadFromFile reader = new ReadFromFile();
+        reader = new ReadFromFile();
         long count=0;
         try (Stream<Path> files = Files.list(Paths.get(dir))) {
              count = files.count();

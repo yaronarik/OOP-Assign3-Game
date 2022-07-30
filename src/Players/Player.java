@@ -36,7 +36,7 @@ public abstract class Player extends Unit {
    {
        exp=exp-50*level;
        level++;
-
+       heal.levelUp(level);
        this.attackPoints+=4*level;
        this.defensePoints+=1*level;
    }
@@ -117,7 +117,7 @@ public abstract class Player extends Unit {
 
 
 
-    public void initialize(Position p, DeathCallBack pb, MessageCallBack msc, SwapCallBack swb, getTileAtPlaceCallBack gta, InputRead inp, CallBacks.getEnemiesInRange getEnemiesInRange)
+    public void initialize(Position p, DeathCallBack pb, MessageCallBack msc, SwapCallBack swb, getTileAtPlaceCallBack gta, InputRead inp, getEnemiesInRange getEnemiesInRange)
     {
         super.initialize(p,pb,msc,swb,gta);
         inputRead=inp;

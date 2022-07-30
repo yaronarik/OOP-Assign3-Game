@@ -8,7 +8,7 @@ import VisitorPattern.Visitor;
 
 public abstract class Enemy extends Unit {
 
-    private int expValue;
+    protected int expValue;
     protected getPlayer getPlayer;
 
     public Enemy( char ch, String name, int healthPool, int attackPoints, int defensePoints, int expValue) {

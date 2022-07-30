@@ -8,7 +8,6 @@ import java.util.function.Function;
 
 public class Monster extends Enemy{
     private int visionRange;
-    private HashMap<Integer, Function> myMap;
     public Monster(char ch,String name,int healthPool,int attackPoints,int defensePoints,int visionRange ,int expValue)
     {
         super(ch,name,healthPool,attackPoints,defensePoints,expValue);
@@ -23,7 +22,6 @@ public class Monster extends Enemy{
         double range =this.getPos().getDistance(playerPosition);
         if(range<visionRange)
         {
-//            Attributes.Position p=playerPosition;
             int dX=this.getPos().getX()-playerPosition.getX();
             int dY=this.getPos().getY()-playerPosition.getY();
             if(Math.abs(dY) > Math.abs(dX))

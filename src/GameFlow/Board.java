@@ -15,12 +15,8 @@ import java.util.stream.Collectors;
 
 public class Board {
     private List<Tile> tiles;
-    private List<Enemy> enemies;
 
-    private Player player;
-//    private CallBacks.MessageCallBack printBoard;
 
-    private int rowCounter=0;
 
 
     public Board(Tile[][] board)
@@ -31,10 +27,7 @@ public class Board {
             tiles.addAll(Arrays.asList(line));
         }
     }
-//    public void initialize(CallBacks.MessageCallBack printBoard)
-//    {
-//        this.printBoard=printBoard;
-//    }
+
         public Tile getTileInPos(Position pos) {
         for(Tile t : tiles){
             if (t.getPos().equals(pos)){
@@ -84,10 +77,10 @@ public class Board {
 
 
 
-    public void swap(Unit u, Tile t) {
-        Position p1=u.getPos();
-        u.setPos(t.getPos());
-        t.setPos(p1);
+    public void swap(Tile t1, Tile t2) {
+        Position p1=t1.getPos();
+        t1.setPos(t2.getPos());
+        t2.setPos(p1);
 
     }
 }
