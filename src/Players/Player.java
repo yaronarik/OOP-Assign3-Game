@@ -60,8 +60,7 @@ public abstract class Player extends Unit {
            case 'a' :
                this.interact(gta.get(this.getPos().getX(),this.getPos().getY()-1));
                break;
-           case 'q' :
-               break;
+           case 'q' :               break;
            case 'e' :
                onAbillityCast();
                break;
