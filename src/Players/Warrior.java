@@ -70,9 +70,14 @@ public class Warrior extends Player{
         }
 
     }
+
     public int getRemainingCooldown()
     {
         return remainingCooldown;
+    }
+    public int getAbillityCooldown()
+    {
+        return abilityCooldown;
     }
     public void setExp(int exp)
     {

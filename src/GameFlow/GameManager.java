@@ -26,12 +26,14 @@ public class GameManager {
     private ReadFromFile reader;
 
 
+
     public GameManager(GameInit gameInit)
     {
         this.gameInit=gameInit;
         scanner=new Scanner(System.in);
         enemies = new LinkedList<>();
-         userInterface= new UI() {
+        reader = new ReadFromFile();
+        userInterface= new UI() {
             @Override
             public void print(String message) {
                 System.out.println(message);
@@ -46,6 +48,10 @@ public class GameManager {
         };
 
     }
+    public ReadFromFile getReader()
+    {
+        return this.reader;
+    }
     public UI getUserInterface()
     {
         return userInterface;
@@ -58,15 +64,18 @@ public class GameManager {
     {
         return player;
     }
-    public void setBoard(Board b)
+    public void setBoard(Tile[][] tiles)
     {
-        this.board=b;
+        this.board=new Board(tiles);
+    }
+    public void setPlayer(Player p)
+    {
+        this.player=p;
     }
 
     public void run(String dir)
     {
 
-        reader = new ReadFromFile();
         long count=0;
         try (Stream<Path> files = Files.list(Paths.get(dir))) {
              count = files.count();

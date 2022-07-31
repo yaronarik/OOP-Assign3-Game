@@ -7,7 +7,7 @@ public class Main {
     {
         GameInit gameInit=new GameInit();
         GameManager gameManager=new GameManager(gameInit);
-        gameManager.run(args[0]);
+        gameManager.run(args[2]);
 
             }
         }

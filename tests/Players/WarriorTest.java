@@ -1,15 +1,19 @@
 package Players;
 
+import Attributes.Health;
 import Attributes.Position;
 import Enemies.Enemy;
 import Enemies.Monster;
+import GameFlow.Board;
 import GameFlow.GameInit;
 import GameFlow.GameManager;
 import GameFlow.ReadFromFile;
 import Tiles.Empty;
+import Tiles.Tile;
 import Tiles.Wall;
 import org.junit.jupiter.api.BeforeEach;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -24,9 +28,9 @@ class WarriorTest {
     void initWarriorTest()
     {
         gameManager = new GameManager(new GameInit());
-        //      gameManager.setBoard(gameManager.buildBoard()); // TODO : Create Board
-        warrior=new Warrior("adir",100,50,20,5);
-        warrior.initialize(new Position(0,0),()-> gameManager.playerDeath() ,(message) -> gameManager.getUserInterface().print(message), (t) -> gameManager.getBoard().swap(gameManager.getPlayer(),t), (x,y ) -> gameManager.getBoard().getTileInPos(new Position(x,y)) ,()-> gameManager.getUserInterface().readChar(),(range)->gameManager.getEnemiesInRange(gameManager.getPlayer(),range) );
+        gameManager.setPlayer(new Warrior("The Hound",400,20,6,5));
+        gameManager.setBoard(gameManager.buildBoard(gameManager.getReader().readAllLines(System.getProperty("user.dir") + "\\testBoard.txt")));
+        warrior =(Warrior) gameManager.getPlayer();
     }
     @org.junit.jupiter.api.Test
     void gainExpAndLevelUpIfNeed() {
@@ -34,55 +38,61 @@ class WarriorTest {
         assertTrue(warrior.gainExpAndLevelUpIfNeed(30));
     }
 
-    @org.junit.jupiter.api.Test
-    void accept() {
-    }
+
 
     @org.junit.jupiter.api.Test
     void testVisitWall() {
-        Wall wall= new Wall();
-        Position p=new Position(0,1);
-        wall.initialize(p);
-        warrior.visit(wall);
-        assertTrue(wall.getPos().equals(new Position(0,1)));
-        assertTrue(warrior.getPos().equals(new Position(0,0)));
+
+        Wall w = (Wall)gameManager.getBoard().getTileInPos(new Position(1,0));
+        warrior.visit(w);
+        assertTrue(warrior.getPos().equals(new Position(1,1)));
+        assertTrue(w.getPos().equals(new Position(1,0)));
     }
 
     @org.junit.jupiter.api.Test
     void testVisitEmpty() {
-        Empty empty= new Empty();
-        Position p=new Position(0,1);
-        empty.initialize(p);
+        Empty empty = (Empty)gameManager.getBoard().getTileInPos(new Position(1,2));
         warrior.visit(empty);
-        assertTrue(empty.getPos().equals(new Position(0,0)));
-        assertTrue(warrior.getPos().equals(new Position(0,1)) );
+        assertTrue(warrior.getPos().equals(new Position(1,2)));
+        assertTrue(empty.getPos().equals(new Position(1,1)));
 
     }
+                   ;
 
-    @org.junit.jupiter.api.Test
-    void testVisitPlayer() {
-    }
+
 
     @org.junit.jupiter.api.Test
     void testVisitEnemy() {
+        Enemy enemy = (Enemy)gameManager.getBoard().getTileInPos(new Position(2,1));
+        while(!enemy.isDied())
+        {
+            int tmpHeal = enemy.getHealth().getHealthAmount();
+            warrior.visit(enemy);
+            assertTrue(enemy.getHealth().getHealthAmount() <= tmpHeal);
+
+        }
+        assertTrue(enemy.isDied());
+        assertFalse(gameManager.getBoard().getTiles().contains(enemy));
+        assertTrue(warrior.getPos().equals(new Position(2,1)));
+        assertTrue(gameManager.getBoard().getTileInPos(new Position(1,1)).getTile()=='.' );
+
+
     }
 
-    @org.junit.jupiter.api.Test
-    void interact() {
-    }
+
 
     @org.junit.jupiter.api.Test
     void isDied() {
-        warrior.getDamage(80);
+        warrior.getDamage(200);
         assertFalse(warrior.isDied());
-        warrior.getDamage(20);
+        warrior.getDamage(200);
         assertTrue(warrior.isDied());
     }
 
     @org.junit.jupiter.api.Test
     void getDamage() {
-        warrior.getDamage(80);
-        assertEquals(warrior.getHealth().getHealthAmount(),20);
+        warrior.getDamage(200);
+        assertEquals(warrior.getHealth().getHealthAmount(),200);
     }
 
 
@@ -98,24 +108,28 @@ class WarriorTest {
         assertTrue(x>= 0 && x<= warrior.getAttackPoints());
     }
 
-    @org.junit.jupiter.api.Test
-    void battle() {
-    }
+
 
     @org.junit.jupiter.api.Test
     void getDistance() {
+        assertEquals(warrior.getDistance(gameManager.getBoard().getTileInPos(new Position(2,1))),1);
     }
 
     @org.junit.jupiter.api.Test
     void compareTo() {
-        Enemy e = new Monster('q',"elad",100,50,20,2,200);
-        e.setPos(new Position(0,1));
-        assertEquals(warrior.compareTo(e),-1);
+
+        assertEquals(gameManager.getPlayer().compareTo(gameManager.getBoard().getTileInPos(new Position(2,1))),-1);
+        assertEquals(gameManager.getPlayer().compareTo(gameManager.getBoard().getTileInPos(new Position(0,1))),1);
 
     }
 
     @org.junit.jupiter.api.Test
     void onAbillityCast() {
+        Health h=warrior.getHealth();
+        int heal=warrior.getHealth().getHealthAmount();
+        warrior.onAbillityCast();
+        assertEquals(warrior.getAbillityCooldown(),warrior.getRemainingCooldown());
+        assertEquals(warrior.getHealth().getHealthAmount(),Math.min(heal+10* warrior.getDefensePoints(),h.getHealthPool()));
     }
 
     @org.junit.jupiter.api.Test
@@ -123,7 +137,7 @@ class WarriorTest {
         warrior.setExp(160);
         warrior.levelUp();
         assertEquals(warrior.getLevel(),3);
-        assertEquals(warrior.getAttackPoints(),80);
+        assertEquals(warrior.getAttackPoints(),50);
         assertEquals(0,warrior.getRemainingCooldown());
     }
 

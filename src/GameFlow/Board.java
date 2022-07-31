@@ -66,6 +66,10 @@ public class Board {
         return res;
 
     }
+    public List<Tile> getTiles()
+    {
+        return tiles;
+    }
     public void remove(Enemy e) {
         tiles.remove(e);
         Position p = e.getPos();
