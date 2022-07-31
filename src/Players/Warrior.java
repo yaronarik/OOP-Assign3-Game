@@ -70,6 +70,18 @@ public class Warrior extends Player{
         }
 
     }
+    public int getRemainingCooldown()
+    {
+        return remainingCooldown;
+    }
+    public void setExp(int exp)
+    {
+        this.exp=exp;
+    }
+    public int getLevel()
+    {
+        return level;
+    }
     // Observer
     public void onTick(){
         super.onTick();

@@ -58,6 +58,10 @@ public class GameManager {
     {
         return player;
     }
+    public void setBoard(Board b)
+    {
+        this.board=b;
+    }
 
     public void run(String dir)
     {

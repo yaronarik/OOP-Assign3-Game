@@ -1,30 +1,31 @@
 package Players;
 
 import Attributes.Position;
+import Enemies.Enemy;
 import Enemies.Monster;
 import GameFlow.GameInit;
 import GameFlow.GameManager;
+import GameFlow.ReadFromFile;
 import Tiles.Empty;
 import Tiles.Wall;
 import org.junit.jupiter.api.BeforeEach;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class WarriorTest {
 
     private Warrior warrior;
-
-    private Player player2;
     private GameManager gameManager;
-
-    private Monster monster;
 
     @BeforeEach
     void initWarriorTest()
     {
         gameManager = new GameManager(new GameInit());
+        //      gameManager.setBoard(gameManager.buildBoard()); // TODO : Create Board
         warrior=new Warrior("adir",100,50,20,5);
-
         warrior.initialize(new Position(0,0),()-> gameManager.playerDeath() ,(message) -> gameManager.getUserInterface().print(message), (t) -> gameManager.getBoard().swap(gameManager.getPlayer(),t), (x,y ) -> gameManager.getBoard().getTileInPos(new Position(x,y)) ,()-> gameManager.getUserInterface().readChar(),(range)->gameManager.getEnemiesInRange(gameManager.getPlayer(),range) );
     }
     @org.junit.jupiter.api.Test
@@ -64,7 +65,6 @@ class WarriorTest {
 
     @org.junit.jupiter.api.Test
     void testVisitEnemy() {
-        //monster = new Monster('s',"monsName",100,30,10,3,20);
     }
 
     @org.junit.jupiter.api.Test
@@ -73,7 +73,10 @@ class WarriorTest {
 
     @org.junit.jupiter.api.Test
     void isDied() {
-
+        warrior.getDamage(80);
+        assertFalse(warrior.isDied());
+        warrior.getDamage(20);
+        assertTrue(warrior.isDied());
     }
 
     @org.junit.jupiter.api.Test
@@ -101,14 +104,14 @@ class WarriorTest {
 
     @org.junit.jupiter.api.Test
     void getDistance() {
-        monster = new Monster('s',"monster_name",200,10,15,5,50);
-        monster.setPos(new Position(1,1));
-        warrior.setPos(new Position(5,4));
-        assertEquals(5,warrior.getDistance(monster));
     }
 
     @org.junit.jupiter.api.Test
     void compareTo() {
+        Enemy e = new Monster('q',"elad",100,50,20,2,200);
+        e.setPos(new Position(0,1));
+        assertEquals(warrior.compareTo(e),-1);
+
     }
 
     @org.junit.jupiter.api.Test
@@ -117,9 +120,12 @@ class WarriorTest {
 
     @org.junit.jupiter.api.Test
     void levelUp() {
+        warrior.setExp(160);
+        warrior.levelUp();
+        assertEquals(warrior.getLevel(),3);
+        assertEquals(warrior.getAttackPoints(),80);
+        assertEquals(0,warrior.getRemainingCooldown());
     }
 
-    @org.junit.jupiter.api.Test
-    void onTick() {
-    }
+
 }
