@@ -81,7 +81,7 @@ public abstract class Player extends Unit {
        v.visit(this);
    }
     public void visit(Player p){
-        messageCallBack.send("error,player visit player");    }
+        messageCallBack.send("Error,player visit player");    }
     public void visit(Enemy e)
     {
         super.battle(e);
@@ -121,5 +121,10 @@ public abstract class Player extends Unit {
         super.initialize(p,pb,msc,swb,gta);
         inputRead=inp;
         this.getEnemiesInRange=getEnemiesInRange;
+    }
+
+    // For tests function.
+    public void setExp(int i){
+       exp = i;
     }
 }

@@ -1,22 +1,23 @@
 package Players;
 
 import Attributes.Position;
+import Enemies.Monster;
 import GameFlow.GameInit;
 import GameFlow.GameManager;
-import GameFlow.ReadFromFile;
 import Tiles.Empty;
 import Tiles.Wall;
 import org.junit.jupiter.api.BeforeEach;
-
-import java.util.ArrayList;
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class WarriorTest {
 
     private Warrior warrior;
+
+    private Player player2;
     private GameManager gameManager;
+
+    private Monster monster;
 
     @BeforeEach
     void initWarriorTest()
@@ -63,6 +64,7 @@ class WarriorTest {
 
     @org.junit.jupiter.api.Test
     void testVisitEnemy() {
+        //monster = new Monster('s',"monsName",100,30,10,3,20);
     }
 
     @org.junit.jupiter.api.Test
@@ -71,6 +73,7 @@ class WarriorTest {
 
     @org.junit.jupiter.api.Test
     void isDied() {
+
     }
 
     @org.junit.jupiter.api.Test
@@ -98,6 +101,10 @@ class WarriorTest {
 
     @org.junit.jupiter.api.Test
     void getDistance() {
+        monster = new Monster('s',"monster_name",200,10,15,5,50);
+        monster.setPos(new Position(1,1));
+        warrior.setPos(new Position(5,4));
+        assertEquals(5,warrior.getDistance(monster));
     }
 
     @org.junit.jupiter.api.Test
